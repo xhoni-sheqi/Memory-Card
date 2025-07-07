@@ -1,5 +1,5 @@
-function ButtonDifficult({ children, onClick }) {
-  return <button onClick={onClick}>{children}</button>;
+function ButtonDifficult({ children, onSetDifficulty }) {
+  return <button onClick={onSetDifficulty}>{children}</button>;
 }
 
 export default ButtonDifficult;

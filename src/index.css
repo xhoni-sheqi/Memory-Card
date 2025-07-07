@@ -1,0 +1,10 @@
+.memory-cards {
+  display: flex;
+  gap: 5rem;
+}
+
+.card {
+  border: 1px solid #333;
+  padding: 2rem;
+  cursor: pointer;
+}

@@ -1,38 +1,35 @@
 import { useState } from "react";
-import ButtonDifficult from "./components/ButtonDifficult";
+import ButtonDifficult from "./components/ButtonDifficult.jsx";
+import MemoryCards from "./components/MemoryCards.jsx";
 
 function App() {
-  const [gameState, setGameState] = useState("selecting"); // countdown , playing , lose/completed
+  const [gamePhase, setGamePhase] = useState("menu"); // game , victory / lost
   const [difficulty, setDifficulty] = useState(null);
-  const [memoryCards, setMemoryCards] = useState([]);
-  const [selectedMemoryCards, setSelectedMemoryCards] = useState([]);
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const handleFetchData = () => {};
-
-  const handleSetGameDifficult = (typeOfDifficulty) => {
-    setDifficulty(typeOfDifficulty);
-    setGameState("countdown");
+  const handleSetDifficulty = (mode) => {
+    setDifficulty(mode);
+    setGamePhase("game");
   };
 
   return (
-    <div>
-      {gameState === "selecting" && (
-        <div className="selecting">
-          <h1>Seleziona Difficoltà :</h1>
-          <ButtonDifficult onClick={() => handleSetGameDifficult("easy")}>
+    <div className="container">
+      {gamePhase === "menu" && (
+        <div className="menu">
+          <h1>Memory Game</h1>
+          <ButtonDifficult onSetDifficulty={() => handleSetDifficulty("easy")}>
             Easy
           </ButtonDifficult>
-          <ButtonDifficult onClick={() => handleSetGameDifficult("medium")}>
+          <ButtonDifficult
+            onSetDifficulty={() => handleSetDifficulty("medium")}
+          >
             Medium
           </ButtonDifficult>
-          <ButtonDifficult onClick={() => handleSetGameDifficult("hard")}>
+          <ButtonDifficult onSetDifficulty={() => handleSetDifficulty("hard")}>
             Hard
           </ButtonDifficult>
         </div>
       )}
+      {gamePhase === "game" && <MemoryCards difficulty={difficulty} />}
     </div>
   );
 }
